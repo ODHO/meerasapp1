@@ -1,1 +1,13 @@
 @import "tailwindcss";
+div#google_translate_element {
+    position: absolute;
+}
+
+div#google_translate_element div#\:0\.targetLanguage {
+    display: flex;
+    width: 100%;
+}
+
+div#google_translate_element div#\:0\.targetLanguage a {
+    display: flex;
+}
