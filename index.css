@@ -11,3 +11,13 @@ div#google_translate_element div#\:0\.targetLanguage {
 div#google_translate_element div#\:0\.targetLanguage a {
     display: flex;
 }
+
+.goog-te-banner-frame {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+.notranslate {
+  translate: no;
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CheckCircle, XCircle, Loader2, ArrowRight } from 'lucide-react';
 import { supabase, Question, Option, UserAnswer } from '../lib/supabase';
+import { SafeText } from './SafeText';
 
 interface QuestionDisplayProps {
   categoryId: string;
@@ -172,7 +173,7 @@ export function QuestionDisplay({
           </div>
 
           <h2 className="text-2xl font-bold text-gray-800 mb-8">
-            {currentQuestion.question_text}
+           <SafeText>{currentQuestion.question_text}</SafeText>
           </h2>
 
           <div className="space-y-4 mb-8">
@@ -196,7 +197,7 @@ export function QuestionDisplay({
                   } ${showExplanation ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-800">{option.option_text}</span>
+                    <span className="text-gray-800"><SafeText>{option.option_text}</SafeText></span>
                     {showCorrectness && (
                       <span className="ml-4">
                         {option.is_correct ? (
@@ -215,13 +216,13 @@ export function QuestionDisplay({
           {showExplanation && selectedOptionData && (
             <div className="mb-6 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-600">
               <h3 className="font-semibold text-blue-900 mb-2">Explanation:</h3>
-              <p className="text-blue-800 mb-4">{selectedOptionData.explanation}</p>
+              <p className="text-blue-800 mb-4"><SafeText>{selectedOptionData.explanation}</SafeText></p>
               <div className="p-4 bg-white rounded-lg">
                 <h4 className="font-semibold text-gray-800 mb-2">
                   Detailed Information:
                 </h4>
                 <p className="text-gray-700 leading-relaxed">
-                  {currentQuestion.explanation}
+                  <SafeText>{currentQuestion.explanation}</SafeText>
                 </p>
               </div>
             </div>

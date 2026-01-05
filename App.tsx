@@ -3,6 +3,7 @@ import { UserAnswer } from "./src/lib/supabase";
 import { LandingPage } from "./src/components/LandingPage";
 import { QuestionDisplay } from "./src/components/QuestionDisplay";
 import { ResultsPage } from "./src/components/ResultsPage";
+import GoogleTranslate from "./src/components/GoogleTranslate";
 
 
 type AppState = 'landing' | 'questions' | 'results';
@@ -37,28 +38,37 @@ const App: React.FC = () => {
   }
 
   return (
-    <>
-      {appState === 'landing' && (
-        <LandingPage onCategorySelect={handleCategorySelect} />
-      )}
+   <>
+  {/* 🌍 Translator */}
+  <div className="fixed top-3 right-3 z-50">
+    <GoogleTranslate />
+  </div>
 
-      {appState === 'questions' && selectedCategory && (
-        <QuestionDisplay
-          categoryId={selectedCategory.id}
-          categoryName={selectedCategory.name}
-          onComplete={handleQuestionsComplete}
-          onBack={handleBackToCategories}
-        />
-      )}
+  {/* 🚫 Prevent Google Translate breaking React */}
+  <div className="notranslate">
+    {appState === 'landing' && (
+      <LandingPage onCategorySelect={handleCategorySelect} />
+    )}
 
-      {appState === 'results' && selectedCategory && (
-        <ResultsPage
-          categoryName={selectedCategory.name}
-          userAnswers={userAnswers}
-          onRestart={handleRestart}
-        />
-      )}
-    </>
+    {appState === 'questions' && selectedCategory && (
+      <QuestionDisplay
+        categoryId={selectedCategory.id}
+        categoryName={selectedCategory.name}
+        onComplete={handleQuestionsComplete}
+        onBack={handleBackToCategories}
+      />
+    )}
+
+    {appState === 'results' && selectedCategory && (
+      <ResultsPage
+        categoryName={selectedCategory.name}
+        userAnswers={userAnswers}
+        onRestart={handleRestart}
+      />
+    )}
+  </div>
+</>
+
   );
 }
 
